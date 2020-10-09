@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import 'mark.js';
 import 'semantic-ui-css/semantic.min.css'
 import { Pagination } from 'semantic-ui-react'
 
@@ -14,6 +13,7 @@ class Form extends React.Component {
             this.handle = this.handle.bind(this);
             this.Updatestate = this.Updatestate.bind(this);
             this.textareahandle = this.textareahandle.bind(this);
+            this.Updatebg = this.Updatebg.bind(this);
 
          
         }
@@ -51,11 +51,11 @@ class Form extends React.Component {
 
         }
 
-        Updatestate(id,newtext){
+        Updatestate(id){
             
             this.props.posts.map((post)=> {
                 if(post.id===id){
-                   // this.setState({});
+           
                     post.mentions.map((lo)=>console.log(`${lo.text}:${lo.type} ( ${lo.location.begin},${lo.location.end})` ));
                     
                 }
@@ -76,12 +76,30 @@ class Form extends React.Component {
                 console.log(selection.toString());
                 console.log(`${start},${end}`)
             }
-           
+        }
 
-   
+         Updatebg(text,id){
 
+            let data = text;
+            let html = [];
             
-           
+            this.props.posts.map((post)=>{
+                if(post.id===id){
+                    post.mentions.map((lo,i)=>{
+                        
+
+                        return html.push(<span key={i+"span"}> {data.slice(lo.location.begin,lo.location.end)} </span>);
+                       
+                    });
+                } return[];
+            })
+
+            return <span>{html}</span>
+
+
+
+
+
 
         }
 
@@ -113,10 +131,10 @@ class Form extends React.Component {
                     <div className="row">
                     <div className="thirteen wide column">
                     <div className="ui card"><div className="content">
-                    <div className="description"><p key = {data.id} onMouseUp={this.textareahandle} id="textarea"> { data.text} </p></div></div></div>
+                    <div className="description"><p key = {data.id} onMouseUp={this.textareahandle} id="textarea"> { this.Updatebg(data.text,data.id)} </p></div></div></div>
                     </div>
                     <div className="column">
-                    <button className="ui primary button" key={"b"+data.id} onClick={()=>{this.Updatestate(data.id,"ทดสอบข้อความใหม่")}}>Click </button> 
+                    <button className="ui primary button" key={"b"+data.id} onClick={()=>{this.Updatestate(data.id)}}>Click </button> 
                     </div>
                     </div>
                     </div>

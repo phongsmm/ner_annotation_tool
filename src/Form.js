@@ -55,8 +55,10 @@ class Form extends React.Component {
             
             this.props.posts.map((post)=> {
                 if(post.id===id){
-           
+                    
+
                     post.mentions.map((lo)=>console.log(`${lo.text}:${lo.type} ( ${lo.location.begin},${lo.location.end})` ));
+
                     
                 }
                 return "";
@@ -74,32 +76,48 @@ class Form extends React.Component {
                 end = range.endOffset;
 
                 console.log(selection.toString());
+                console.log(range)
                 console.log(`${start},${end}`)
             }
         }
 
          Updatebg(text,id){
 
-            let data = text;
-            let html = [];
-            
-            this.props.posts.map((post)=>{
+            var data = text;
+            var html = [];
+            var cut = [];
+            var lo_begin = [];
+            var lo_end = [];
+            this.props.posts.map((post)=>{ 
                 if(post.id===id){
-                    post.mentions.map((lo,i)=>{
-                        
+                    var m = post.mentions.sort((a,b)=>{return a.location.begin - b.location.begin})
+                m.map((m,i)=>{cut.push(<span key={"child : "+i} className={m.type}>{data.slice(m.location.begin,m.location.end)}</span>)
+                lo_begin.push(m.location.begin)
+                return lo_end.push(m.location.end)
+            })
+                }
+               
+                
 
-                        return html.push(<span key={i+"span"}> {data.slice(lo.location.begin,lo.location.end)} </span>);
-                       
-                    });
-                } return[];
+                return [];
             })
 
+            for(var i = 0;i<=cut.length;i++){
+                if(i===0){
+                html.push(<span key={"normal :"+i}>{data.slice(0,lo_begin[i])}</span>)
+                    html.push(cut[i])
+                }
+                else{
+                    html.push(<span key={"normal :"+i}>{data.slice(lo_end[i-1],lo_begin[i])}</span>)
+                    html.push(cut[i])
+                }
+            }
+
+
+
+
+
             return <span>{html}</span>
-
-
-
-
-
 
         }
 

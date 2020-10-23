@@ -47,6 +47,14 @@
   margin-bottom: 20px;
 }
 
+.Location{
+  background-color: green;
+}
+
+.Person{
+  background-color: aqua;
+}
+
 .color-black{
   background-color: black;
   color: black;

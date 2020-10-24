@@ -93,6 +93,7 @@ class Form extends React.Component {
                     var m = post.mentions.sort((a,b)=>{return a.location.begin - b.location.begin})
                 m.map((m,i)=>{cut.push(<span key={"child : "+i} className={m.type}>{data.slice(m.location.begin,m.location.end)}</span>)
                 lo_begin.push(m.location.begin)
+                
                 return lo_end.push(m.location.end)
             })
                 }

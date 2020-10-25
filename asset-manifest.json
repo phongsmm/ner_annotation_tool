@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/ner_tagger/static/css/main.fcec706f.chunk.css",
-    "main.js": "/ner_tagger/static/js/main.d446e271.chunk.js",
-    "main.js.map": "/ner_tagger/static/js/main.d446e271.chunk.js.map",
-    "runtime-main.js": "/ner_tagger/static/js/runtime-main.3764d449.js",
-    "runtime-main.js.map": "/ner_tagger/static/js/runtime-main.3764d449.js.map",
-    "static/css/2.a85c8fce.chunk.css": "/ner_tagger/static/css/2.a85c8fce.chunk.css",
-    "static/js/2.329ffbd4.chunk.js": "/ner_tagger/static/js/2.329ffbd4.chunk.js",
-    "static/js/2.329ffbd4.chunk.js.map": "/ner_tagger/static/js/2.329ffbd4.chunk.js.map",
-    "index.html": "/ner_tagger/index.html",
-    "precache-manifest.140e6a12b0324390e9f484a521b718fe.js": "/ner_tagger/precache-manifest.140e6a12b0324390e9f484a521b718fe.js",
-    "service-worker.js": "/ner_tagger/service-worker.js",
-    "static/css/2.a85c8fce.chunk.css.map": "/ner_tagger/static/css/2.a85c8fce.chunk.css.map",
-    "static/css/main.fcec706f.chunk.css.map": "/ner_tagger/static/css/main.fcec706f.chunk.css.map",
-    "static/js/2.329ffbd4.chunk.js.LICENSE.txt": "/ner_tagger/static/js/2.329ffbd4.chunk.js.LICENSE.txt",
-    "static/media/semantic.min.css": "/ner_tagger/static/media/outline-icons.ef60a4f6.woff",
-    "static/media/logo.svg": "/ner_tagger/static/media/logo.ee7cd8ed.svg"
+    "main.css": "/ner_annotation_tool/static/css/main.fcec706f.chunk.css",
+    "main.js": "/ner_annotation_tool/static/js/main.c8da57a5.chunk.js",
+    "main.js.map": "/ner_annotation_tool/static/js/main.c8da57a5.chunk.js.map",
+    "runtime-main.js": "/ner_annotation_tool/static/js/runtime-main.78634b7f.js",
+    "runtime-main.js.map": "/ner_annotation_tool/static/js/runtime-main.78634b7f.js.map",
+    "static/css/2.5e38276b.chunk.css": "/ner_annotation_tool/static/css/2.5e38276b.chunk.css",
+    "static/js/2.38c08973.chunk.js": "/ner_annotation_tool/static/js/2.38c08973.chunk.js",
+    "static/js/2.38c08973.chunk.js.map": "/ner_annotation_tool/static/js/2.38c08973.chunk.js.map",
+    "index.html": "/ner_annotation_tool/index.html",
+    "precache-manifest.12e43de99bfefc91d19c397cf2b76c3c.js": "/ner_annotation_tool/precache-manifest.12e43de99bfefc91d19c397cf2b76c3c.js",
+    "service-worker.js": "/ner_annotation_tool/service-worker.js",
+    "static/css/2.5e38276b.chunk.css.map": "/ner_annotation_tool/static/css/2.5e38276b.chunk.css.map",
+    "static/css/main.fcec706f.chunk.css.map": "/ner_annotation_tool/static/css/main.fcec706f.chunk.css.map",
+    "static/js/2.38c08973.chunk.js.LICENSE.txt": "/ner_annotation_tool/static/js/2.38c08973.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/ner_annotation_tool/static/media/outline-icons.ef60a4f6.woff",
+    "static/media/logo.svg": "/ner_annotation_tool/static/media/logo.ee7cd8ed.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.3764d449.js",
-    "static/css/2.a85c8fce.chunk.css",
-    "static/js/2.329ffbd4.chunk.js",
+    "static/js/runtime-main.78634b7f.js",
+    "static/css/2.5e38276b.chunk.css",
+    "static/js/2.38c08973.chunk.js",
     "static/css/main.fcec706f.chunk.css",
-    "static/js/main.d446e271.chunk.js"
+    "static/js/main.c8da57a5.chunk.js"
   ]
 }

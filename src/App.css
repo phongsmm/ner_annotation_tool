@@ -48,11 +48,23 @@
 }
 
 .Location{
-  background-color: green;
+  background-color: chartreuse;
 }
 
 .Person{
   background-color: aqua;
+}
+.Organization{
+  background-color: orange;
+}
+.JobTitle{
+  background-color:plum;
+}
+.Number{
+  background-color: olivedrab;
+}
+.Facility{
+  background-color:burlywood;
 }
 
 .color-black{

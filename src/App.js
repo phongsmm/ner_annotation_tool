@@ -1,9 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
-import Form from './Form';
+import Databoard from'./Databoard';
 import axios from 'axios';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
+import { Label } from 'semantic-ui-react'
 
 
 class App extends React.Component {
@@ -14,7 +15,7 @@ class App extends React.Component {
       txt: "",
       posts: [],
       currentpage: 1,
-      postperpage: 50,
+      postperpage: 10,
       datatotal:0,
       tags : {
 
@@ -91,16 +92,17 @@ Changepage(e,page){
     <div className="App">
       <div>
         <div className="ui attached tabular menu"><a href="!#" className="active item">
-  <i aria-hidden="true" className="users icon"></i>NerTagger</a><a href="!#" className="item">Data<div className="ui label">{this.state.posts.length}</div>
+  <i aria-hidden="true" className="users icon"></i>NER (annotation tool) </a><a href="!#" className="item">Data<div className="ui label">{this.state.posts.length}</div>
           </a>
+          <button className="ui button" >Add </button> 
           </div>
-  <div className="ui bottom attached segment active tab color-black">Person : {this.state.tags.Person}</div>
+  <div className="ui bottom attached segment active tab color-black"> <Label color='blue'>Person : {this.state.tags.Person} </Label></div>
           </div>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
 
-        <Form {...this.state} Changepage = {this.Changepage}/>
+        <Databoard {...this.state} Changepage = {this.Changepage}/>
 
       </header>
     </div>

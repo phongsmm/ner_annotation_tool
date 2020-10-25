@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
-import { Pagination ,TransitionablePortal, Button, Segment, Header,Input,Dropdown,Grid,Confirm} from 'semantic-ui-react'
+import { Pagination ,TransitionablePortal, Button, Segment, Header,Input,Dropdown,Grid} from 'semantic-ui-react'
 
 
 class Databoard extends React.Component {
@@ -47,6 +47,16 @@ class Databoard extends React.Component {
 
         componentDidMount() {
 
+            setInterval(() => {
+                if(document.getElementById('checkmark')!=null){
+                    var x = document.getElementById('checkmark')
+                    x.style.display = 'none'
+                }
+               
+                this.setState({error:{msg:""}})
+                
+              }, 4000);
+
 
         }
 
@@ -89,23 +99,27 @@ class Databoard extends React.Component {
 
 
         doPost(data){
+            var error = 0
 
             if((this.state.pick.begin===0&&this.state.pick.end===0 )|| this.state.pick.begin===this.state.pick.end){
+                error+=1
                 this.setState({error:{status:true,msg:"Please Select Text"}});
             }
 
-            var have =0
+           
 
             data.mentions.map(mention=>{
                 
                 if(mention.location.begin === this.state.pick.begin && mention.location.end === this.state.pick.end)
-                    {   have+=1
+                    {   error+=1
                         this.setState({error:{status:true,msg:"This Tag already exists!"}});
                     }
                     return[]
                 })
 
-                if(have===0){
+                if(error===0){
+                    var x = document.getElementById('checkmark')
+                    x.style.display = 'block'
                     console.log("PUT SO NICE") }
     
             
@@ -239,12 +253,7 @@ class Databoard extends React.Component {
 
                 return (  
                 <div> 
-                    <Confirm
-          open={this.state.error.status}
-          content={this.state.error.msg}
-          onCancel={()=>this.confirm(0)}
-          onConfirm={()=>this.confirm(1)}
-        />
+                   
                     { currentpost.map((data ,i) => { 
                       return [
                     <div key={"a" + data.id} > 
@@ -262,7 +271,7 @@ class Databoard extends React.Component {
                     <div className="column">
 
                     <TransitionablePortal
-                    closeOnTriggerClick
+                    
                     onOpen={this.handleOpen}
                     onClose={this.handleClose}
                     openOnTriggerClick
@@ -281,12 +290,13 @@ class Databoard extends React.Component {
                     <Header>ข้อความรหัสที่ {data.id}</Header>
                     <Grid columns={2} divided style={{marginRight:'5px',marginLeft:'5px'}}>
                     <Grid.Row>
-                        <Segment style={{width:"90%"}}>  <p onMouseUp={this.textareahandle}>{data.text}</p> </Segment>
-                   
+                        <Segment style={{width:"90%"}}>  <p onMouseUp={this.textareahandle}>{data.text}</p>   </Segment>
+                        <i id="checkmark" className="check circle outline icon" style={{color:'green',fontSize:'150%',marginTop:'3%',marginLeft:'2%',display:'none'}}></i>
+                    <p style={{color:'red',marginLeft:'5%'}}>{this.state.error.msg}</p>
                     </Grid.Row>
                     <Grid.Row>
                    <Grid.Column>
-                <Input placeholder='ข้อความ' value={this.state.text} style={{width:"100%"}}  /> 
+                <Input placeholder='ข้อความ' value={this.state.text} style={{width:"100%"}}  />
                  
                    </Grid.Column>
                    

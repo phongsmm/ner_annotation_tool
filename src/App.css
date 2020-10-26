@@ -1,7 +1,19 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+}
+body{
+  background: #282c34;
 }
 
+
+footer{
+  text-align: center;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  background-color:#282c34;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -23,6 +35,18 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.Dashboard{
+
+    display: flex;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  
+}
+
+
+
+
 
 .App-link {
   color: #61dafb;
@@ -66,11 +90,23 @@
 .Facility{
   background-color:burlywood;
 }
-
+.Label{
+  margin-top: 10%;
+}
 .color-black{
   background-color: black;
   color: black;
 }
+.box{
+  justify-content: center;
+  display: grid;
+  font-size: 20px;
+}
+
+.breakline{
+  margin-bottom: 30px;
+}
+
 
 @keyframes App-logo-spin {
   from {

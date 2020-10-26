@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
+import axios from 'axios';
 import { Pagination ,TransitionablePortal, Button, Segment, Header,Input,Dropdown,Grid} from 'semantic-ui-react'
 
 
@@ -33,7 +34,7 @@ class Databoard extends React.Component {
             this.Updatebg = this.Updatebg.bind(this);
             this.checktext = this.checktext.bind(this);
             this.tag_select = this.tag_select.bind(this);
-            this.doPost = this.doPost.bind(this);
+            this.doPut = this.doPut.bind(this);
             this.confirm = this.confirm.bind(this);
 
 
@@ -95,8 +96,53 @@ class Databoard extends React.Component {
 
 
         handleOpen = () => this.setState({ portalopen: true ,pick:{begin:0,end:0},text:"ข้อความ" })
-        handleClose = () => this.setState({ portalopen: false })
+        handleClose = () =>{ this.setState({ portalopen: false }) 
+                                window.location.reload()}
 
+
+        doPut(data){
+            var error = 0
+            var location = []
+            var have = false
+
+            if((this.state.pick.begin===0&&this.state.pick.end===0 )|| this.state.pick.begin===this.state.pick.end){
+                error+=1
+                this.setState({error:{status:true,msg:"Please Select Text"}});
+            }
+
+           
+
+            data.mentions.map(mention=>{
+
+                location.push(`${mention.location.begin},${mention.location.end}`)
+    
+
+                   return[]
+                })
+                var base_location = `${this.state.pick.begin},${this.state.pick.end}`
+
+               for(var i = 0 ; i<=location.length;i++){
+                   if(location[i]===base_location){
+                       have = true
+                   }
+               }
+
+
+    
+
+                if(error===0&&have===true){
+                    this.checkmark()
+                    axios.put(`http://localhost:8000/settype/${data.id}/${this.state.pick.begin}/${this.state.pick.end}/${this.state.seltag}`)
+
+                }
+                else{
+                    this.setState({error:{status:true,msg:"Tags Not Found"}});
+                }
+
+    
+            
+        
+        }
 
         doPost(data){
             var error = 0
@@ -118,14 +164,84 @@ class Databoard extends React.Component {
                 })
 
                 if(error===0){
-                    var x = document.getElementById('checkmark')
-                    x.style.display = 'block'
-                    console.log("PUT SO NICE") }
+
+                    var Rest = data
+                    Rest.mentions.push( {
+                        "location": {
+                          "begin": this.state.pick.begin,
+                          "end": this.state.pick.end
+                        },
+                        "text": this.state.text,
+                        "type": this.state.seltag,
+                      });
+    
+                    axios.put(`http://localhost:8000/update/${data.id}`,Rest)
+                    this.checkmark()
+
+
+                }
+
     
             
         
         }
 
+        doDelete(data){
+            var error = 0
+            var location = []
+            var have = false
+
+            if((this.state.pick.begin===0&&this.state.pick.end===0 )|| this.state.pick.begin===this.state.pick.end){
+                error+=1
+                this.setState({error:{status:true,msg:"Please Select Text"}});
+            }
+
+           
+
+            data.mentions.map(mention=>{
+
+                location.push(`${mention.location.begin},${mention.location.end}`)
+    
+
+                   return[]
+                })
+                var base_location = `${this.state.pick.begin},${this.state.pick.end}`
+
+               for(var i = 0 ; i<=location.length;i++){
+                   if(location[i]===base_location){
+                       have = true
+                   }
+               }
+
+
+
+
+                if(error===0&&have===true){
+                    this.checkmark()
+            
+
+                    
+                    axios.delete(`http://localhost:8000/unset/${data.id}/${this.state.pick.begin}/${this.state.pick.end}`)
+
+                }
+                else{
+                    this.setState({error:{status:true,msg:"Tags Not Found"}});
+                }
+
+    
+
+        }
+
+        
+        checkmark(){
+
+            try{
+                var x = document.getElementById('checkmark')
+                    x.style.display = 'block'
+                    console.log("PUT SO NICE") 
+            }catch(e){console.log(e)}
+
+        }
 
         Updatestate(data,i){
             data.mentions.map((lo)=> {
@@ -252,37 +368,38 @@ class Databoard extends React.Component {
 
 
                 return (  
-                <div> 
-                   
-                    { currentpost.map((data ,i) => { 
-                      return [
-                    <div key={"a" + data.id} > 
-                    <div className="ui grid">
-                    <div className="row">
-                    <div className="thirteen wide column">
+                <div className="App"> 
 
-                    <div className="ui card" >
+              <div className="breakline"></div>
+                { currentpost.map((data ,i) => { 
+                      return [
+         
+            
+                    <div className="box" key={"x" + data.id}> 
+                    <div className="ui card" key={"a" + data.id}>
                         <div className="content" >
-                            <div className="description"> <p>{this.Updatebg(data)}</p> </div>
+                            <div className="description"> <p>{this.Updatebg(data)}</p> 
+                            </div>
                         </div>
                     </div>
-                    </div>
+                   
 
-                    <div className="column">
-
-                    <TransitionablePortal
-                    
+                    <div style={{position:"relative" ,buttom:"60px" ,left:"200px" ,top:"-100px"}}>
+                     <TransitionablePortal
                     onOpen={this.handleOpen}
                     onClose={this.handleClose}
                     openOnTriggerClick
                     trigger={
-                    <Button className="ui primary button"
+
+                    <Button
                     key={"b"+data.id}
                     onClick={()=>{this.Updatestate(data,i)}}
                     content={portalopen ? 'EDIT' : 'EDIT'}
                     negative={portalopen}
                     positive={!portalopen}
-                    />}>
+                    />
+
+                    }>
                         
                     <Segment
                     style={{ left: '30%', position: 'fixed', top: '20%', zIndex: 1000 ,width:'40%',height:'67%'}}
@@ -305,38 +422,34 @@ class Databoard extends React.Component {
                     <Button disabled={true} >{this.state.pick.end}</Button>
                    
                 </Grid.Column>
-                    
-            
-                    
                     </Grid.Row>
                   
-                    
                     <Grid.Row> <Dropdown placeholder='State' fluid search selection options={Tags} style={{MarginTop:'10%'}} onChange={(e,data)=>this.tag_select(data)}/></Grid.Row>
                     <Grid.Row>
                     
                      <Button className ="ui primary button" onClick={()=>this.doPost(data)} > POST</Button> 
-                    <Button className ="ui yellow button"> PUT</Button>
-                    <Button className ="ui red button" > DELETE</Button>
+                    <Button className ="ui yellow button"  onClick={()=>this.doPut(data)}> PUT</Button>
+                    <Button className ="ui red button" onClick={()=>this.doDelete(data)}> DELETE</Button>
                     </Grid.Row>
                     
                     </Grid>
                     </Segment>
                     </TransitionablePortal>
-
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    ];    
-                            })}
-
-                    <div className="mt-30 mb-20">
-                        <Pagination ellipsisItem={null} activePage={this.props.currentpage} totalPages={pageNumber.length} onPageChange={this.props.Changepage}/>
                     </div>
 
+
+
+
+                    </div>
                    
-                    
-                </div>
+                    ]})}
+
+                    <Pagination ellipsisItem={null} activePage={this.props.currentpage} totalPages={pageNumber.length} onPageChange={this.props.Changepage}/>
+                
+            
+           
+        
+                    </div>
                                     )}}
 
 export default Databoard;

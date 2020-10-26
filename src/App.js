@@ -272,7 +272,7 @@ handleInput (e,data){
                     </TransitionablePortal>
 
 
-                    <button style={{backgroundColor:"#35b6e7",borderStyle:"none",color:"white",fontWeight:"bold",fontSize:"15px"}}> DATA </button>
+                    <button alt="" onClick={()=>{window.open("https://fastapi-nlp.herokuapp.com/get/", "_blank")}} style={{backgroundColor:"#35b6e7",borderStyle:"none",color:"white",fontWeight:"bold",fontSize:"15px"}}> DATA </button>
 
            
       

@@ -23,19 +23,20 @@ class Databoard extends React.Component {
                 error:{
                     status:false,
                     msg:""
-                }
+                },
+                reload:false
 
             }
         
 
             this.handle = this.handle.bind(this);
-            this.Updatestate = this.Updatestate.bind(this);
             this.textareahandle = this.textareahandle.bind(this);
             this.Updatebg = this.Updatebg.bind(this);
             this.checktext = this.checktext.bind(this);
             this.tag_select = this.tag_select.bind(this);
             this.doPut = this.doPut.bind(this);
             this.confirm = this.confirm.bind(this);
+            this.handleClose = this.handleClose.bind(this);
 
 
          
@@ -94,10 +95,16 @@ class Databoard extends React.Component {
 
         }
 
+        reload(){window.location.reload()}
 
         handleOpen = () => this.setState({ portalopen: true ,pick:{begin:0,end:0},text:"ข้อความ" })
-        handleClose = () =>{ this.setState({ portalopen: false }) 
-                                window.location.reload()}
+
+        handleClose(){  this.setState({ portalopen: false }) 
+                        if(this.state.reload){this.reload()} }
+                        
+
+    
+       
 
 
         doPut(data){
@@ -132,7 +139,9 @@ class Databoard extends React.Component {
 
                 if(error===0&&have===true){
                     this.checkmark()
-                    axios.put(`http://localhost:8000/settype/${data.id}/${this.state.pick.begin}/${this.state.pick.end}/${this.state.seltag}`)
+                    axios.put(`${this.props.Url_settype}${data.id}/${this.state.pick.begin}/${this.state.pick.end}/${this.state.seltag}`)
+                    this.setState({reload:true})
+                    
 
                 }
                 else{
@@ -175,7 +184,7 @@ class Databoard extends React.Component {
                         "type": this.state.seltag,
                       });
     
-                    axios.put(`http://localhost:8000/update/${data.id}`,Rest)
+                    axios.put(`${this.props.Url_update}${data.id}`,Rest)
                     this.checkmark()
 
 
@@ -221,7 +230,8 @@ class Databoard extends React.Component {
             
 
                     
-                    axios.delete(`http://localhost:8000/unset/${data.id}/${this.state.pick.begin}/${this.state.pick.end}`)
+                    axios.delete(`${this.props.Url_unset}${data.id}/${this.state.pick.begin}/${this.state.pick.end}`)
+                    this.setState({reload:true})
 
                 }
                 else{
@@ -238,21 +248,10 @@ class Databoard extends React.Component {
             try{
                 var x = document.getElementById('checkmark')
                     x.style.display = 'block'
-                    console.log("PUT SO NICE") 
             }catch(e){console.log(e)}
 
         }
 
-        Updatestate(data,i){
-            data.mentions.map((lo)=> {
-                 console.log(`${lo.text}:${lo.type} ( ${lo.location.begin},${lo.location.end})` )
-
-
-                return "";
-            }   
-            );
-
-        }
 
         textareahandle(){
 
@@ -393,7 +392,6 @@ class Databoard extends React.Component {
 
                     <Button
                     key={"b"+data.id}
-                    onClick={()=>{this.Updatestate(data,i)}}
                     content={portalopen ? 'EDIT' : 'EDIT'}
                     negative={portalopen}
                     positive={!portalopen}
@@ -402,7 +400,7 @@ class Databoard extends React.Component {
                     }>
                         
                     <Segment
-                    style={{ left: '30%', position: 'fixed', top: '20%', zIndex: 1000 ,width:'40%',height:'67%'}}
+                    style={{ left: '30%', position: 'fixed', top: '20%', zIndex: 1000 ,width:'40%',minHeight:'230px'}}
                     >
                     <Header>ข้อความรหัสที่ {data.id}</Header>
                     <Grid columns={2} divided style={{marginRight:'5px',marginLeft:'5px'}}>

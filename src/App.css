@@ -90,6 +90,25 @@ footer{
 .Facility{
   background-color:burlywood;
 }
+.GeographicFeature{ background-color:bisque}
+.TwitterHandle { background-color: #61dafb}
+.Hashtag { background-color: darkgray}
+.IPAddress { background-color: lightpink}
+.URL { background-color: steelblue}
+.EmailAddress { background-color: teal}
+.PhoneNumber { background-color: gold}
+.Address { background-color: darkkhaki}
+.Percent { background-color: palevioletred}
+.Ordinal { background-color: saddlebrown}
+.Duration { background-color: olive}
+.Money { background-color: maroon}
+.Measure { background-color: mediumorchid}
+.Time { background-color: lightsteelblue}
+.Date { background-color: khaki}
+.Product { background-color: darkgoldenrod}
+
+
+
 .Label{
   margin-top: 10%;
 }
@@ -107,6 +126,10 @@ footer{
   margin-bottom: 30px;
 }
 
+.add.b{
+  background-color : #60e32f
+
+}
 
 @keyframes App-logo-spin {
   from {

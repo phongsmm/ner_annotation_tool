@@ -4,7 +4,7 @@ import Databoard from'./Databoard';
 import axios from 'axios';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
-import { Label ,Grid,Menu} from 'semantic-ui-react'
+import { Label ,Grid,Menu,TransitionablePortal,Button,Segment,Header,TextArea,Form,Input} from 'semantic-ui-react'
 
 
 class App extends React.Component {
@@ -15,8 +15,14 @@ class App extends React.Component {
       txt: "",
       posts: [],
       currentpage: 1,
-      postperpage: 10,
+      postperpage: 5,
       datatotal:0,
+      portalopen:false,
+      reload:false,
+      textarea:"",
+      input:0,
+      success:"",
+      error:{status:false,msg:""},
       tags : {
 
         "Person":0,
@@ -44,7 +50,13 @@ class App extends React.Component {
 
       },
       Url_get:"http://localhost:8000/get/",
+      Url_add:"http://localhost:8000/add/",
       Url_list:"http://localhost:8000/list/",
+      Url_update:"http://localhost:8000/update/",
+      Url_unset:"http://localhost:8000/unset/",
+      Url_delete:"http://localhost:8000/delete/",
+      Url_settype:"http://localhost:8000/settype/",
+
 
       
 
@@ -56,6 +68,11 @@ class App extends React.Component {
 
   };
     this.Changepage = this.Changepage.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.doPost = this.doPost.bind(this);
+    this.doDelete = this.doDelete.bind(this);
+    this.handletextarea = this.handletextarea.bind(this);
+    this.handleInput = this.handleInput.bind(this);
 
     
    
@@ -76,6 +93,13 @@ class App extends React.Component {
   "URL":list.data.URL,"IPAddress":list.data.IPAddress,"Hashtag":list.data.Hashtag,"TwitterHandle":list.data.TwitterHandle}})
 
 
+
+  setInterval(() => {
+    this.setState({error:{msg:""},success:""})
+    
+  }, 4000);
+
+
     
 
     
@@ -93,6 +117,77 @@ Changepage(e,page){
 
 }
 
+   async doPost( ){
+
+    if(this.state.textarea.length<2){
+      this.setState({error:{status:true,msg:"Please Input a Sentence"}})
+    }
+    else if(this.state.input.length<1||!Number.isInteger(parseInt(this.state.input))){
+      this.setState({error:{status:true,msg:"Please Input a ID"}})
+    }
+    else{
+      try {
+        var res = await axios.post(`${this.state.Url_add}`,{"id":this.state.input,"text":this.state.textarea ,"mentions":[]})
+      }
+      catch(e){
+        console.log(e)
+      }
+     
+      if(res.data.Alert === "ID Exists"){ this.setState({error:{status:true,msg:"ID already exists"}})}
+
+      else{
+        this.setState({success:`Success insert ID: ${this.state.input}`,reload:true})
+
+      }
+
+
+    }
+  
+
+  
+    
+  }
+  async doDelete(){
+
+ 
+    if(this.state.input.length<1||!Number.isInteger(parseInt(this.state.input))){
+      this.setState({error:{status:true,msg:"Please Input a ID"}})
+    }
+    else{
+      try {
+        var res = await axios.delete(`${this.state.Url_delete}${this.state.input}`)
+      }
+      catch(e){
+        console.log(e)
+      }
+     
+      if(res.data.Alert === "ID NOT FOUND!"){ this.setState({error:{status:true,msg:"ID NOT FOUND!"}})}
+
+      else{
+        this.setState({success:`Success remove ID: ${this.state.input}`,reload:true})
+
+      }
+
+
+    }
+  
+
+  }
+
+
+reload(){window.location.reload()}
+
+handleOpen = () => this.setState({ portalopen: true })
+
+handleClose(){  this.setState({ portalopen: false }) 
+                if(this.state.reload){this.reload()} }
+
+handletextarea(e,data){
+  this.setState({textarea:data.value})
+}
+handleInput (e,data){
+  this.setState({input:data.value})
+}
 
 
   render(){
@@ -122,8 +217,65 @@ Changepage(e,page){
           active={false}
           onClick={()=>{}}
         />
-  
-      <button style={{background:"#92817a",color:"white",borderStyle: "none",fontSize:"15px",borderWidth: "0px"}}>DATA</button>
+
+     
+      <TransitionablePortal
+                    onOpen={this.handleOpen}
+                    onClose={this.handleClose}
+                    openOnTriggerClick
+                    trigger={
+                      <button style={{backgroundColor:"#58d629",borderStyle:"none",color:"white",fontWeight:"bold",fontSize:"15px"}}> MANAGE </button>
+
+                    }>
+                        
+                    <Segment
+                    style={{ left: '30%', position: 'fixed', top: '20%', zIndex: 1000 ,width:'40%',minHeight:'250px'}}
+                    >
+                    <Header>NER MANAGE</Header>
+                   <Grid>
+                     <Grid.Column>
+                       <Grid.Row>
+                         <Form>
+      <TextArea placeholder='ข้อความ' style={{ maxHeight: 250 }}  onChange = {this.handletextarea}/>
+                        </Form>
+                        <p style={{color:"red"}}> {this.state.error.msg } </p>
+                        <p style={{color:"green"}}> {this.state.success}</p>
+                       </Grid.Row>
+
+                       <Grid.Row style={{marginTop:"5px"}}>
+                       <Input
+                          label={{ basic: true, content: 'ID' }}
+                          labelPosition='right'
+                          placeholder='Enter ID'
+                          onChange = {this.handleInput}
+                          /> 
+                        
+                       </Grid.Row>
+
+                       <Grid.Row style={{marginTop:"5px"}}>
+                        <Button positive onClick={this.doPost}>POST</Button> 
+                        
+                   
+                        <Button negative onClick={this.doDelete}>Delete</Button>
+                        
+                    
+                 
+                       </Grid.Row>
+
+                 
+
+                     </Grid.Column>
+                   </Grid>
+                    
+           
+                    </Segment>
+                    </TransitionablePortal>
+
+
+                    <button style={{backgroundColor:"#35b6e7",borderStyle:"none",color:"white",fontWeight:"bold",fontSize:"15px"}}> DATA </button>
+
+           
+      
 
       </Menu>
    

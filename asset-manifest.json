@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ner_annotation_tool/static/css/main.1ea7a71a.chunk.css",
-    "main.js": "/ner_annotation_tool/static/js/main.890c22be.chunk.js",
-    "main.js.map": "/ner_annotation_tool/static/js/main.890c22be.chunk.js.map",
+    "main.js": "/ner_annotation_tool/static/js/main.d0d8c071.chunk.js",
+    "main.js.map": "/ner_annotation_tool/static/js/main.d0d8c071.chunk.js.map",
     "runtime-main.js": "/ner_annotation_tool/static/js/runtime-main.78634b7f.js",
     "runtime-main.js.map": "/ner_annotation_tool/static/js/runtime-main.78634b7f.js.map",
     "static/css/2.5e38276b.chunk.css": "/ner_annotation_tool/static/css/2.5e38276b.chunk.css",
     "static/js/2.de4f6a9f.chunk.js": "/ner_annotation_tool/static/js/2.de4f6a9f.chunk.js",
     "static/js/2.de4f6a9f.chunk.js.map": "/ner_annotation_tool/static/js/2.de4f6a9f.chunk.js.map",
     "index.html": "/ner_annotation_tool/index.html",
-    "precache-manifest.a0e6cb0fcc916d1730f8df5d2c8f8ca1.js": "/ner_annotation_tool/precache-manifest.a0e6cb0fcc916d1730f8df5d2c8f8ca1.js",
+    "precache-manifest.0d579dc77e2d1bb7345c1a716d63b4f1.js": "/ner_annotation_tool/precache-manifest.0d579dc77e2d1bb7345c1a716d63b4f1.js",
     "service-worker.js": "/ner_annotation_tool/service-worker.js",
     "static/css/2.5e38276b.chunk.css.map": "/ner_annotation_tool/static/css/2.5e38276b.chunk.css.map",
     "static/css/main.1ea7a71a.chunk.css.map": "/ner_annotation_tool/static/css/main.1ea7a71a.chunk.css.map",
@@ -22,6 +22,6 @@
     "static/css/2.5e38276b.chunk.css",
     "static/js/2.de4f6a9f.chunk.js",
     "static/css/main.1ea7a71a.chunk.css",
-    "static/js/main.890c22be.chunk.js"
+    "static/js/main.d0d8c071.chunk.js"
   ]
 }

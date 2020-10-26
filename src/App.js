@@ -49,13 +49,13 @@ class App extends React.Component {
         "TwitterHandle":0,
 
       },
-      Url_get:"http://localhost:8000/get/",
-      Url_add:"http://localhost:8000/add/",
-      Url_list:"http://localhost:8000/list/",
-      Url_update:"http://localhost:8000/update/",
-      Url_unset:"http://localhost:8000/unset/",
-      Url_delete:"http://localhost:8000/delete/",
-      Url_settype:"http://localhost:8000/settype/",
+      Url_get:"https://fastapi-nlp.herokuapp.com/get/",
+      Url_add:"https://fastapi-nlp.herokuapp.com/add/",
+      Url_list:"https://fastapi-nlp.herokuapp.com/list/",
+      Url_update:"https://fastapi-nlp.herokuapp.com/update/",
+      Url_unset:"https://fastapi-nlp.herokuapp.com/unset/",
+      Url_delete:"https://fastapi-nlp.herokuapp.com/delete/",
+      Url_settype:"https://fastapi-nlp.herokuapp.com/settype/",
 
 
       

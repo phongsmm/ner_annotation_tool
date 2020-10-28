@@ -1,10 +1,13 @@
 .App {
   text-align: center;
   background-color: #282c34;
+  background-size: cover;
   min-height: 100vh;
+  z-index: 10;
 }
 body{
   background: #282c34;
+  background-size: cover
 }
 
 
@@ -38,9 +41,13 @@ footer{
 
 .Dashboard{
 
-    display: flex;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    text-align: center;
+    justify-content: center;
+    background-color: #282c34;
+    background-size: cover;
+    min-height: 100vh;
+    z-index: 1;
+
   
 }
 
@@ -117,9 +124,27 @@ footer{
   color: black;
 }
 .box{
-  justify-content: center;
-  display: grid;
   font-size: 20px;
+  justify-content: center;
+}
+
+  .Edit{
+  
+    margin-right: -25%;
+    margin-top: -20%;
+    float: right;
+    
+  }
+
+
+
+
+.container {
+  display: flex;           /* establish flex container */
+  flex-direction: column;  /* make main axis vertical */
+  justify-content: center; /* center items vertically, in this case */
+  align-items: center;     /* center items horizontally, in this case */
+  height: 300px;
 }
 
 .breakline{

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios';
-import { Pagination ,TransitionablePortal, Button, Segment, Header,Input,Dropdown,Grid} from 'semantic-ui-react'
+import { Pagination ,TransitionablePortal, Button, Segment, Header,Input,Dropdown,Grid,Card} from 'semantic-ui-react'
 
 
 class Databoard extends React.Component {
@@ -367,23 +367,30 @@ class Databoard extends React.Component {
 
 
                 return (  
-                <div className="App"> 
-
-              <div className="breakline"></div>
+                <div className="Dashboard"> 
+                <Card.Group itemsPerRow={1} stackable style={{width:"30%",right:"-39%",height:"800px",position:"relative",fontSize:"20px",marginButtom:"20px"}}>
                 { currentpost.map((data ,i) => { 
                       return [
          
             
-                    <div className="box" key={"x" + data.id}> 
-                    <div className="ui card" key={"a" + data.id}>
-                        <div className="content" >
-                            <div className="description"> <p>{this.Updatebg(data)}</p> 
-                            </div>
-                        </div>
-                    </div>
-                   
+                    <div  key={"x" + data.id}>
 
-                    <div style={{position:"relative" ,buttom:"60px" ,left:"200px" ,top:"-100px"}}>
+
+    <Card 
+	 style={{overflow: 'auto', maxHeight: 300,minHeight:150}}>
+      <Card.Content >
+        <Card.Description >
+        <p>{this.Updatebg(data)}</p>
+        </Card.Description>
+      </Card.Content>
+    </Card>
+
+    
+
+ 
+
+
+            
                      <TransitionablePortal
                     onOpen={this.handleOpen}
                     onClose={this.handleClose}
@@ -391,6 +398,7 @@ class Databoard extends React.Component {
                     trigger={
 
                     <Button
+                    style={{position:"relative",right:"-170px",top:"-60px"}}
                     key={"b"+data.id}
                     content={portalopen ? 'EDIT' : 'EDIT'}
                     negative={portalopen}
@@ -433,16 +441,28 @@ class Databoard extends React.Component {
                     </Grid>
                     </Segment>
                     </TransitionablePortal>
+
+                 
+                
+                    
+                    
                     </div>
 
 
 
 
-                    </div>
+
+                   
                    
                     ]})}
 
+
                     <Pagination ellipsisItem={null} activePage={this.props.currentpage} totalPages={pageNumber.length} onPageChange={this.props.Changepage}/>
+                    </Card.Group>
+                    
+                        
+
+                   
                 
             
            

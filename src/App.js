@@ -4,7 +4,7 @@ import Databoard from'./Databoard';
 import axios from 'axios';
 import './App.css';
 import 'semantic-ui-css/semantic.min.css'
-import { Label ,Grid,Menu,TransitionablePortal,Button,Segment,Header,TextArea,Form,Input} from 'semantic-ui-react'
+import { Label ,Grid,Menu,TransitionablePortal,Button,Segment,Header,TextArea,Form,Input,GridColumn,GridRow} from 'semantic-ui-react'
 
 
 class App extends React.Component {
@@ -23,6 +23,7 @@ class App extends React.Component {
       input:0,
       success:"",
       error:{status:false,msg:""},
+      cuttext:"",
       tags : {
 
         "Person":0,
@@ -71,9 +72,11 @@ class App extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.doPost = this.doPost.bind(this);
     this.doDelete = this.doDelete.bind(this);
+    this.doCut = this.doCut.bind(this);
     this.handletextarea = this.handletextarea.bind(this);
     this.handleInput = this.handleInput.bind(this);
-
+    this.handlecutarea = this.handlecutarea.bind(this);
+    
     
    
   }
@@ -174,6 +177,18 @@ Changepage(e,page){
 
   }
 
+  async doCut(){
+        var res = await axios.get(`https://fastapi-nlp.herokuapp.com/cut/${this.state.cuttext}`)
+        try{
+          var arr = res.data.message
+          var msg = ""
+          for(var i =0 ; i<=arr.length-1;i++) {msg += " "+arr[i] } 
+          this.setState({cuttext:msg})
+        }catch(e){console.log(e)}
+        
+
+  }
+
 
 reload(){window.location.reload()}
 
@@ -189,14 +204,18 @@ handleInput (e,data){
   this.setState({input:data.value})
 }
 
+handlecutarea(e,data){
+  this.setState({cuttext:data.value})
+}
+
 
   render(){
   return (
-    <div className="App">
+    <div className="App " >
 
-
- 
-<header>
+<Grid>
+<GridColumn>
+<GridRow>
 <Menu size='small'>
 <img alt="" src={logo} className="App-logo" style={{width:"50px",height:"40px",position:"relative"}}></img>
         <Menu.Item
@@ -224,7 +243,12 @@ handleInput (e,data){
                     onClose={this.handleClose}
                     openOnTriggerClick
                     trigger={
-                      <button style={{backgroundColor:"#58d629",borderStyle:"none",color:"white",fontWeight:"bold",fontSize:"15px"}}> MANAGE </button>
+                      <Menu.Item
+                      style={{backgroundColor:"#b8de6f",color:"white"}}
+                      name= "MANAGE"
+                      active={false}
+                      onClick={()=>{}}
+                    />
 
                     }>
                         
@@ -272,7 +296,65 @@ handleInput (e,data){
                     </TransitionablePortal>
 
 
-                    <button alt="" onClick={()=>{window.open("https://fastapi-nlp.herokuapp.com/get/", "_blank")}} style={{backgroundColor:"#35b6e7",borderStyle:"none",color:"white",fontWeight:"bold",fontSize:"15px"}}> DATA </button>
+                    <TransitionablePortal
+                    onOpen={this.handleOpen}
+                    onClose={this.handleClose}
+                    openOnTriggerClick
+                    trigger={
+                      <Menu.Item
+                      style={{backgroundColor:"#595b83",color:"white"}}
+                      name= "CUT"
+                      active={false}
+                      onClick={()=>{}}
+                    />
+
+                    }>
+                        
+                    <Segment
+                    style={{ left: '30%', position: 'fixed', top: '20%', zIndex: 1000 ,width:'40%',minHeight:'250px'}}
+                    >
+                    <Header>CUT</Header>
+                   <Grid>
+                     <Grid.Column>
+                       <Grid.Row>
+                         <Form>
+                  <TextArea placeholder='ข้อความ' style={{ maxHeight: 250 }}  onChange = {this.handlecutarea} value={this.state.cuttext}/>
+                        </Form>
+                        <p style={{color:"red"}}> {this.state.error.msg } </p>
+                        <p style={{color:"green"}}> {this.state.success}</p>
+                       </Grid.Row>
+
+                       <Grid.Row style={{marginTop:"5px"}}>
+                     
+                        
+                       </Grid.Row>
+
+                       <Grid.Row style={{marginTop:"5px"}}>
+                        <Button positive onClick={this.doCut}>CUT</Button> 
+                        
+                   
+                        
+                    
+                 
+                       </Grid.Row>
+
+                 
+
+                     </Grid.Column>
+                   </Grid>
+                    
+           
+                    </Segment>
+                    </TransitionablePortal>
+
+                    <Menu.Item
+                    style={{backgroundColor:"#01c5c4",color:"white"}}
+                      name= "DATA"
+                      active={false}
+                      onClick={()=>{window.open("https://fastapi-nlp.herokuapp.com/get/", "_blank")}}
+                    />
+
+                   
 
            
       
@@ -308,25 +390,23 @@ handleInput (e,data){
      <Label color='blue'className="Label">Hashtag : {this.state.tags.Hashtag} </Label>
      <Label color='blue'className="Label">TwitterHandle : {this.state.tags.TwitterHandle} </Label>
      </Grid.Row>
-     </Grid>
- 
-      </header>
-
-
-     <Databoard {...this.state} Changepage = {this.Changepage}/>
-
-
-
-
     
-      
+     </Grid>
+     </GridRow>
 
 
+     <GridRow>
 
+      <div style={{marginTop:"20px"}}>
+     <Databoard {...this.state} Changepage = {this.Changepage}/>
+     <div style={{marginButtom:"30px"}}></div>
+     </div>
+    
+     </GridRow>
 
      
-
-    
+     </GridColumn>
+     </Grid>
 
   
     </div>

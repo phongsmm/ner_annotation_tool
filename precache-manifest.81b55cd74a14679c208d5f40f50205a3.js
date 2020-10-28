@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f9aac163ad3dfc3320e11474536c19a9",
+    "revision": "aa5bec9248d82cdfeba78815a47b23d1",
     "url": "/ner_annotation_tool/index.html"
   },
   {
-    "revision": "7dc11a06a5580cf4ee4f",
+    "revision": "5b69c6f78e13c97f71a9",
     "url": "/ner_annotation_tool/static/css/2.5e38276b.chunk.css"
   },
   {
-    "revision": "e4b3a39b61529a3ff56e",
-    "url": "/ner_annotation_tool/static/css/main.1ea7a71a.chunk.css"
+    "revision": "6499b1b033b8181e9f7f",
+    "url": "/ner_annotation_tool/static/css/main.43b9cbc8.chunk.css"
   },
   {
-    "revision": "7dc11a06a5580cf4ee4f",
-    "url": "/ner_annotation_tool/static/js/2.de4f6a9f.chunk.js"
+    "revision": "5b69c6f78e13c97f71a9",
+    "url": "/ner_annotation_tool/static/js/2.a9409d25.chunk.js"
   },
   {
     "revision": "5bd09eb7f2cf4d145d532d862be18942",
-    "url": "/ner_annotation_tool/static/js/2.de4f6a9f.chunk.js.LICENSE.txt"
+    "url": "/ner_annotation_tool/static/js/2.a9409d25.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e4b3a39b61529a3ff56e",
-    "url": "/ner_annotation_tool/static/js/main.d0d8c071.chunk.js"
+    "revision": "6499b1b033b8181e9f7f",
+    "url": "/ner_annotation_tool/static/js/main.62cc516f.chunk.js"
   },
   {
     "revision": "bbbf4833e48e19bfad78",

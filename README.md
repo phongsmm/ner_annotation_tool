@@ -1,7 +1,16 @@
 # About
+  This is a Project of Thai-Nichi Institute of Technology's Student.
   
-Name : NER annotation tool 
-Link : [ https://phongsmm.github.io/ner_annotation_tool/ ]
+  Feature 
+  * Tag Entity
+  * Delete Tags
+  * Insert Text
+  * Get Data
+  * Cut by pythainlp (model : newmm )
+  
+* Project : NER annotation tool 
+* Developer : Phongpisut Meemuk
+* Link : [ https://phongsmm.github.io/ner_annotation_tool/ ]
 
 
 # Technology

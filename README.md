@@ -2,11 +2,11 @@
   This is a Project of Thai-Nichi Institute of Technology's Student.
   
   Feature 
-  * Tag Entity
-  * Delete Tags
-  * Insert Text
-  * Get Data
-  * Cut by pythainlp (model : newmm )
+  - Tag Entity
+  - Delete Tags
+  - Insert Text
+  - Get Data
+  - Cut Thai Text (by pythainlp (model : newmm ))
   
 * Project : NER annotation tool 
 * Developer : Phongpisut Meemuk

@@ -11,7 +11,9 @@
  Info
 * Project : NER annotation tool 
 * Developer : Phongpisut Meemuk
-* Link : [ https://phongsmm.github.io/ner_annotation_tool/ ]
+
+* Link : [ https://phongsmm.github.io/ner_annotation_tool/ ] (If nothing show up please click "DATA" button for once and try again )
+
 
 
 # Technology
